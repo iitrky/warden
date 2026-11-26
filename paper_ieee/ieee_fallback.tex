@@ -1,0 +1,42 @@
+%% IEEEtran-equivalent styling used ONLY when IEEEtran.cls is not installed.
+%% On Overleaf / full TeX Live the real IEEEtran class is used and this file is ignored.
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{enumitem}
+\setlength{\parindent}{1em}
+\renewcommand{\baselinestretch}{1.0}
+\makeatletter
+\renewcommand\normalsize{\@setfontsize\normalsize{10}{12}%
+  \abovedisplayskip 5pt plus 2pt minus 2pt\belowdisplayskip\abovedisplayskip
+  \abovedisplayshortskip 3pt plus 1pt\belowdisplayshortskip\abovedisplayshortskip}
+\normalsize
+\renewcommand\footnotesize{\@setfontsize\footnotesize{8}{9}}
+\renewcommand\scriptsize{\@setfontsize\scriptsize{7}{8}}
+% title block
+\def\@maketitle{\newpage\null\vskip -6pt
+  \begin{center}{\fontsize{24}{26}\selectfont \@title\par}\vskip 10pt
+  {\fontsize{11}{13}\selectfont \@author\par}\end{center}\par\vskip 12pt}
+\makeatother
+% sections: I. INTRODUCTION / A. Subsection
+\renewcommand\thesection{\Roman{section}}
+\renewcommand\thesubsection{\thesection-\Alph{subsection}}
+\titleformat{\section}{\centering\normalsize\scshape}{\thesection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{8pt plus 2pt}{4pt}
+\titleformat{\subsection}{\normalsize\itshape}{\Alph{subsection}.}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{6pt plus 1pt}{3pt}
+% abstract and keywords
+\renewenvironment{abstract}{\noindent\small\bfseries\emph{Abstract}---}{\par\vskip 4pt}
+\newenvironment{IEEEkeywords}{\noindent\small\bfseries\emph{Index Terms}---}{\par\vskip 6pt}
+\usepackage{lettrine}
+\newcommand{\IEEEPARstart}[2]{\lettrine[lines=2,findent=1pt,nindent=0pt]{#1}{\MakeUppercase{#2}}}
+% captions
+\captionsetup[figure]{font=footnotesize,labelsep=period,name=Fig.,skip=3pt}
+\captionsetup[table]{font=footnotesize,labelsep=newline,textfont=sc,justification=centering,skip=3pt}
+\renewcommand\thetable{\Roman{table}}
+\setlist[enumerate]{leftmargin=*,itemsep=1pt,topsep=2pt}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt}
+\setlength{\dbltextfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{3pt}
+\newcommand{\IEEEmembership}[1]{\textit{#1}}
+\makeatletter\def\@fnsymbol#1{}\makeatother % IEEE: first-page affiliation footnotes are unmarked

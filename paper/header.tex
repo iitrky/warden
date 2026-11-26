@@ -1,0 +1,16 @@
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{xurl}
+\usepackage{ragged2e}
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {\origfigure[H]\centering} {\endorigfigure}
+\usepackage{caption}
+\captionsetup{font=small,labelformat=empty,justification=justified,singlelinecheck=false}
+\setlength{\emergencystretch}{3em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+\titlespacing*{\subsection}{0pt}{9pt}{4pt}
+\usepackage{needspace}

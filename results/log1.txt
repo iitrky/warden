@@ -1,0 +1,15 @@
+[   12.9s] data ready {'train': 103360, 'val': 17280, 'cal': 17280, 'test': 34560} ood test 34560
+[  325.4s] trained WARDEN
+[  429.8s] trained WARDEN-noIMU
+[  529.4s] trained WARDEN-noCross
+[  633.6s] trained WARDEN-noMono
+[  724.1s] trained Transformer
+[  817.5s] trained GRU
+[  920.6s] trained WARDEN-single
+[  921.9s] trained LogReg
+[  932.3s] trained HGBoost
+[  935.0s] trained MLP
+[  935.4s] pred metrics done
+[  938.1s] predictor policies done
+[  940.2s] calibration ablations done
+[  962.7s] saved; total 962.6630210876465

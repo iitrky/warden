@@ -1,0 +1,42 @@
+
+digraph G {
+  graph [rankdir=TB, fontname="DejaVu Sans", fontsize=12, nodesep=0.3, ranksep=0.3, pad=0.1, newrank=true];
+  node  [shape=box, style="rounded,filled", fillcolor="white", color="#1f2a36", fontname="DejaVu Sans", fontsize=11];
+  edge  [color="#1f2a36", arrowsize=0.6, fontname="DejaVu Sans"];
+
+  subgraph cluster_in { label="Inputs at epoch t (on buoy)"; color="#9aa5b1"; style="rounded";
+    s1 [label="Beacon SNR history\nx(t-W+1..t)"];
+    s2 [label="IMU sea-state\nHs, Tp, tilt rms, heave"];
+    s3 [label="Ephemeris\nelevation, next pass"];
+    s4 [label="Tide table, distance,\nmast and antenna heights"]; }
+
+  pp [label="Physics-informed wave prior\nGauss-Hermite over heave\n(Section 4.4)", fillcolor="#e7f1fb"];
+
+  subgraph cluster_net { label="WARDEN-Net predictor (Section 4.2)"; color="#9aa5b1"; style="rounded";
+    e1 [label="Embedding +\npositional code"];
+    e2 [label="Temporal multi-head\nself-attention + FFN"];
+    c1 [label="Context encoder\nc(t)"];
+    e3 [label="Sea-state-conditioned\ncross-attention\n(query = c(t))"];
+    e4 [label="Gated fusion"];
+    h1 [label="SF-monotone\nordinal head\np7 ≤ … ≤ p12"];
+    h2 [label="Satellite head\npSAT"];
+    rh [label="Physics-residual head\nz + softplus(β)·logit(π)", fillcolor="#e7f1fb"]; }
+
+  subgraph cluster_unc { label="Uncertainty (Section 4.3)"; color="#9aa5b1"; style="rounded";
+    u1 [label="Deep ensemble (M)\n+ temperature scaling"];
+    u2 [label="Lower-confidence score\ns = μ − κσ"]; }
+
+  subgraph cluster_rc { label="Risk-controlled selection (Sections 4.3, 4.5)"; color="#9aa5b1"; style="rounded";
+    r1 [label="Mondrian Learn-then-Test\nλ_b per sea-state stratum\n(offline, calibration split)", fillcolor="#fff7ec"];
+    r2 [label="Selective rule:\ncheapest option with s ≥ λ(u,b)\nelse DEFER", fillcolor="#fff7ec"];
+    r3 [label="Adaptive conformal\nupdate of α_(u,b)(t)\n(online, receipt bitmap)", fillcolor="#fff7ec"];
+    s5 [label="Buffer age\n(oldest reading)"];
+    r4 [label="Urgency flag u(t)\n(Section 4.5)", fillcolor="#fff7ec"]; }
+
+  out [label="Transmit SFk / LR-FHSS\nor buffer reading", fillcolor="#f2f4f6"];
+
+  s1 -> e1 -> e2 -> e3; s2 -> e1; s2 -> c1; s3 -> c1; c1 -> e3; e3 -> e4; c1 -> e4;
+  s2 -> pp; s3 -> pp; s4 -> pp; pp -> c1; pp -> rh; s5 -> r4; r4 -> r2;
+  e4 -> h1; e4 -> h2; h1 -> rh; h2 -> rh; rh -> u1; u1 -> u2 -> r2; r1 -> r2; r2 -> out;
+  out -> r3 [style=dashed, label=" ACK / loss ", fontsize=8]; r3 -> r2 [style=dashed];
+}

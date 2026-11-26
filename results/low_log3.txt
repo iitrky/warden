@@ -1,0 +1,4 @@
+[  105.2s] done days 2 5440
+[  261.2s] done days 4 11200
+[  590.5s] done days 8 22720
+[  590.5s] saved

@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the accompanying article."
+title: "WARDEN: Wave Aware Risk Controlled Link Selection for Hybrid LoRa and LEO Satellite Ocean Monitoring IoT"
+authors:
+  - family-names: "Arul Dalton"
+    given-names: "G."
+    orcid: "https://orcid.org/0000-0002-5981-7176"
+    affiliation: "Department of Computer Science and Engineering, Saveetha Engineering College, Chennai, India"
+  - family-names: "Mani"
+    given-names: "S. V. J."
+    affiliation: "Department of Computer Science Engineering and Cyber Security, Saveetha Engineering College, Chennai, India"
+license: MIT
+version: "1.0.0"
+date-released: "2026-11-16"
+repository-code: "https://github.com/iitrky/warden"
