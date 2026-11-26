@@ -195,7 +195,7 @@ This paper presented WARDEN, a wave aware decision engine that lets an ocean mon
 
 # Declarations
 
-**Funding** Not applicable (to be completed by the authors).
+**Funding** This research received no specific grant from any funding agency in the public, commercial or not-for-profit sectors.
 
 **Competing interests** The authors declare no competing interests.
 
